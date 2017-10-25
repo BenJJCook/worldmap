@@ -64,14 +64,16 @@
 	
 	</svg>
    <br/>
-   <div id="regionInfo" style="display:none;">
-	   <h1 id="selectedCounty"></h1>
-	   <p><strong>Population: </strong><span id="population"></span></p>
-	   <p><strong>Description: </strong><span id="description"></span></p>
-	   <button id="exploreButton">Explore</button>
-	   
-   </div>
-   <button id="backButton">Back</button>
+   <div id="noLoadingRegion">
+	   <div id="regionInfo" style="display:none;">
+		   <h1 id="selectedCounty"></h1>
+		   <p><strong>Population: </strong><span id="population"></span></p>
+		   <p><strong>Description: </strong><span id="description"></span></p>
+		   <button id="exploreButton">Explore</button>
+		   
+	   </div>
+	   <button id="backButton">Back</button>
+	</div>
 	<script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
 	<script>
 		// Initialize Firebase
@@ -223,6 +225,8 @@
 					panZoomTiger.disableZoom();
 					
 					
+					$('#noLoadingRegion').css('display', 'none');
+					
 				  intervalID = setInterval(function(){
 					if (!zooming && animationStep++ < animationSteps) {
 					  panZoomTiger.panBy({x: stepX, y: stepY});
@@ -241,6 +245,8 @@
 							$('#regionInfo').css('display', 'block');
 							$('#backButton').css('display', 'inline');
 							$('#toverlay').css('display', 'inline');
+							
+							$('#noLoadingRegion').css('display', 'inline');
 							
 							clearInterval(intervalID);
 						}
